@@ -19,6 +19,9 @@ all: $(DEBS)
 submodule:
 ifeq ($(shell test -f "$(SRCDIR)/configure" && echo 1 || echo 0), 0)
 	git submodule update --init --recursive
+endif
+# also when the submodule was initialised by someone else (e.g. a CI/build script)
+ifeq ($(shell test -d "$(SRCDIR)/subprojects/keycodemapdb" && echo 1 || echo 0), 0)
 	cd $(SRCDIR); meson subprojects download
 endif
 
