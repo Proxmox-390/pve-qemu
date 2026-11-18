@@ -34,6 +34,7 @@ my @skip_models = (
     'cortex-m33',
     'cortex-m4',
     'cortex-m55',
+    'cortex-m85',
     'cortex-m7',
     'cortex-r5',
     'cortex-r52',
@@ -63,7 +64,7 @@ while (my $line = <STDIN>) {
         # has unusual info: QEMU Virtual CPU version 2.5+
         $cpu_models->{$model} = 'AuthenticAMD';
         next;
-    } elsif ($model =~ m/^((kvm|qemu)(32|64)-v1|max|qemu)$/) { # 'qemu' is the s390x one
+    } elsif ($model =~ m/^((kvm|qemu)(32|64)-v1|max|max-v8|max-v9|qemu)$/) { # 'qemu' is the s390x one
         $cpu_models->{$model} = 'default';
         next;
     } elsif ($model =~ m/^$skip_models_re(-v\d)?$/) {
