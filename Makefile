@@ -38,6 +38,9 @@ PC_BIOS_FW_PURGE_LIST_IN = \
 	qemu_vga.ndrv \
 	slof.bin \
 	opensbi-riscv.*-generic-fw_dynamic.bin \
+	hexagon_booter_.* \
+	hexagon_loadlinux_.* \
+	hexagon-hypervisor-license.txt \
 
 BLOB_PURGE_SED_CMDS = $(foreach FILE,$(PC_BIOS_FW_PURGE_LIST_IN),-e "/$(FILE)/d")
 BLOB_PURGE_FILTER = $(foreach FILE,$(PC_BIOS_FW_PURGE_LIST_IN),-e "$(FILE)")
