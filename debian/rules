@@ -17,6 +17,17 @@ machine_file_aarch64 := $(destdir)/usr/share/kvm/machine-versions-aarch64.json
 cpu_models_file_x86_64 := $(destdir)/usr/share/kvm/cpu-models-x86_64.json
 cpu_models_file_aarch64 := $(destdir)/usr/share/kvm/cpu-models-aarch64.json
 
+# s390x (qemu-mod fork build): add the native s390x system emulator, SPICE is not available
+# (no libspice-server for s390x in Debian), and the s390-ccw IPL firmware is built from source.
+TARGET_LIST := x86_64-softmmu,aarch64-softmmu
+SPICE := --enable-spice
+ifeq ($(DEB_HOST_ARCH),s390x)
+TARGET_LIST := $(TARGET_LIST),s390x-softmmu
+SPICE := --disable-spice
+machine_file_s390x := $(destdir)/usr/share/kvm/machine-versions-s390x.json
+cpu_models_file_s390x := $(destdir)/usr/share/kvm/cpu-models-s390x.json
+endif
+
 # default QEMU out-of-tree build directory is ./build
 BUILDDIR=build
 
@@ -46,7 +57,7 @@ endif
 	    --localstatedir=/var \
 	    --prefix=/usr \
 	    --sysconfdir=/etc \
-	    --target-list=x86_64-softmmu,aarch64-softmmu \
+	    --target-list=$(TARGET_LIST) \
 	    --with-suffix="kvm" \
 	    --with-pkgversion="${DEB_SOURCE}_${DEB_VERSION_UPSTREAM_REVISION}" \
 	    --audio-drv-list="alsa" \
@@ -78,7 +89,7 @@ endif
 	    --enable-seccomp \
 	    --enable-slirp \
 	    --enable-sndio \
-	    --enable-spice \
+	    $(SPICE) \
 	    --enable-usb-redir \
 	    --enable-virglrenderer \
 	    --enable-virtfs \
@@ -145,6 +156,16 @@ install: build
 	# new expected files (and parse-cpu-models.pl script).
 	diff -u $(cpu_models_file_x86_64) ./debian/cpu-models-x86_64.json
 	diff -u $(cpu_models_file_aarch64) ./debian/cpu-models-aarch64.json
+ifeq ($(DEB_HOST_ARCH),s390x)
+	# guest IPL firmware, built from pc-bios/s390-ccw (the prebuilt blob is purged from the source)
+	install -m 0644 $(BUILDDIR)/pc-bios/s390-ccw/s390-ccw.img $(destdir)/usr/share/kvm/s390-ccw.img
+	$(destdir)/usr/bin/qemu-system-s390x -machine help | ./debian/parse-machines.pl > $(machine_file_s390x)
+	$(destdir)/usr/bin/qemu-system-s390x -cpu help | ./debian/parse-cpu-models.pl > $(cpu_models_file_s390x)
+	diff -u $(cpu_models_file_s390x) ./debian/cpu-models-s390x.json
+	# the native qemu-system-s390x conflicts with Debian's qemu-system-s390x package
+	echo 'pve:Arch-Provides=qemu-system-s390x,' >> debian/$(PACKAGE).substvars
+	echo 'pve:Arch-Conflicts=qemu-system-s390x,' >> debian/$(PACKAGE).substvars
+endif
 
 # Build architecture-independent files here.
 binary-indep: build install

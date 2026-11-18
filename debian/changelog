@@ -1,3 +1,18 @@
+pve-qemu-kvm (11.1.90-1+s390x1) trixie; urgency=medium
+
+  * s390x port (fork-only packaging, branch s390x/qemu-mod): build from
+    cyberdotgent/qemu-mod master instead of Proxmox's mirror_qemu. qemu-mod
+    is upstream QEMU master (11.2 development, VERSION 11.1.90) plus extra
+    s390x support (ECKD/FBA DASD, 3590 tape, qeth/OSA, 3270/3215 consoles,
+    channel-program IPL, mtm-3907 machine). It carries the pve-qemu 11.1.3-2
+    patch queue as individual commits, so debian/patches/series is empty.
+
+  * s390x: add the s390x-softmmu target, disable SPICE (no libspice-server
+    on s390x), install the s390-ccw IPL firmware built from source, and
+    generate machine-versions-s390x.json and cpu-models-s390x.json.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Wed, 18 Nov 2026 12:00:00 +0100
+
 pve-qemu-kvm (11.1.3-2) trixie; urgency=medium
 
   * vma: speed up restores by merging contiguous writes into one request and

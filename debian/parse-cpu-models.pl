@@ -50,6 +50,7 @@ my $aliases = {};
 
 while (my $line = <STDIN>) {
     last if $line =~ /^\s*Recognized CPUID flags:/;
+    last if $line =~ /^\s*Recognized feature flags:/; # s390x
     next if $line =~ /^\s*Available CPUs:/;
     next if $line =~ /^$/;
 
@@ -62,7 +63,7 @@ while (my $line = <STDIN>) {
         # has unusual info: QEMU Virtual CPU version 2.5+
         $cpu_models->{$model} = 'AuthenticAMD';
         next;
-    } elsif ($model =~ m/^((kvm|qemu)(32|64)-v1|max)$/) {
+    } elsif ($model =~ m/^((kvm|qemu)(32|64)-v1|max|qemu)$/) { # 'qemu' is the s390x one
         $cpu_models->{$model} = 'default';
         next;
     } elsif ($model =~ m/^$skip_models_re(-v\d)?$/) {
@@ -95,6 +96,11 @@ while (my $line = <STDIN>) {
         next;
     } elsif ($info =~ m/^(Intel|Genuine Intel|Westmere)/) {
         $cpu_models->{$model} = 'GenuineIntel';
+        next;
+    } elsif ($info =~ m/^IBM /) {
+        # s390x: expose the named models, not the static '-base' variants
+        next if $model =~ m/-base$/;
+        $cpu_models->{$model} = 'IBM';
         next;
     }
 

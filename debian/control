@@ -31,7 +31,7 @@ Build-Depends: debhelper-compat (= 13),
                libslirp-dev,
                libsndio-dev,
                libspice-protocol-dev (>= 0.12.14~),
-               libspice-server-dev (>= 0.14.0~),
+               libspice-server-dev (>= 0.14.0~) [!s390x],
                libsystemd-dev,
                liburing-dev,
                libusb-1.0-0-dev (>= 1.0.17),
@@ -69,12 +69,14 @@ Conflicts: kvm,
            qemu-system-data,
            qemu-system-x86,
            qemu-utils,
-Provides: qemu-system-arm, qemu-system-x86, qemu-utils,
+           ${pve:Arch-Conflicts}
+Provides: qemu-system-arm, qemu-system-x86, qemu-utils, ${pve:Arch-Provides}
 Replaces: pve-kvm,
           pve-qemu-kvm-2.6.18,
           qemu-system-arm,
           qemu-system-x86,
           qemu-utils,
+          ${pve:Arch-Conflicts}
 Breaks: qemu-server (<= 8.0.6)
 Description: Full virtualization on x86 hardware
  Using KVM, one can run multiple virtual PCs, each running unmodified Linux or
