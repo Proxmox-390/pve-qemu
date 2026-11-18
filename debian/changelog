@@ -1,3 +1,13 @@
+pve-qemu-kvm (11.1.90-1+s390x2) trixie; urgency=medium
+
+  * update submodule to qemu-mod fe2791af5f: rename the AES helpers of the
+    s390x CPACF emulation (crypto/aes-helpers.c). Their AES_cbc_encrypt()
+    was exported from qemu-system-s390x and interposed OpenSSL's in Ceph's
+    libceph-common, so every VM with a disk on RBD (librbd) crashed at
+    start when the client key was of type "aes".
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Wed, 18 Nov 2026 23:30:00 +0100
+
 pve-qemu-kvm (11.1.90-1+s390x1) trixie; urgency=medium
 
   * s390x port (fork-only packaging, branch s390x/qemu-mod): build from
