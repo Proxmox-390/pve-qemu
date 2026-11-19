@@ -70,7 +70,7 @@ Conflicts: kvm,
            qemu-system-x86,
            qemu-utils,
            ${pve:Arch-Conflicts}
-Provides: qemu-system-arm, qemu-system-x86, qemu-utils, ${pve:Arch-Provides}
+Provides: qemu-utils, ${pve:Arch-Provides}
 Replaces: pve-kvm,
           pve-qemu-kvm-2.6.18,
           qemu-system-arm,

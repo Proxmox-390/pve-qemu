@@ -1,3 +1,20 @@
+pve-qemu-kvm (11.1.90-1+s390x4) trixie; urgency=medium
+
+  * update submodule to qemu-mod 88909d852c:
+    - machine mtm-3907 renamed to czam ("CZAM hardware mode"), versioned:
+      czam-v1 plus the alias czam; the name mtm-3907 is gone.
+    - eckd-ccw and fba-ccw: configurable identity (control-unit-type,
+      control-unit-model, device-type, device-model), defaults unchanged.
+    - no channel-program IPL before -loadstate/-loadvm has loaded the
+      state (bogus "IPL from device ... failed" on resume and rollback).
+    - qeth: announce registered VLANs and layer-3 addresses after
+      migration (tagged RARPs, gratuitous ARP, unsolicited NA).
+
+  * s390x: build only the s390x-softmmu target (no x86_64/aarch64
+    emulators, no qemu-system-x86/arm Provides on s390x).
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Thu, 19 Nov 2026 10:19:04 +0100
+
 pve-qemu-kvm (11.1.90-1+s390x3) trixie; urgency=medium
 
   * update submodule to qemu-mod f094f81170:

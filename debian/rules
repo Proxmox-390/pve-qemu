@@ -17,12 +17,13 @@ machine_file_aarch64 := $(destdir)/usr/share/kvm/machine-versions-aarch64.json
 cpu_models_file_x86_64 := $(destdir)/usr/share/kvm/cpu-models-x86_64.json
 cpu_models_file_aarch64 := $(destdir)/usr/share/kvm/cpu-models-aarch64.json
 
-# s390x (qemu-mod fork build): add the native s390x system emulator, SPICE is not available
-# (no libspice-server for s390x in Debian), and the s390-ccw IPL firmware is built from source.
+# s390x (qemu-mod fork build): only the native s390x system emulator (foreign architectures are
+# never offered on s390x), SPICE is not available (no libspice-server for s390x in Debian), and
+# the s390-ccw IPL firmware is built from source.
 TARGET_LIST := x86_64-softmmu,aarch64-softmmu
 SPICE := --enable-spice
 ifeq ($(DEB_HOST_ARCH),s390x)
-TARGET_LIST := $(TARGET_LIST),s390x-softmmu
+TARGET_LIST := s390x-softmmu
 SPICE := --disable-spice
 machine_file_s390x := $(destdir)/usr/share/kvm/machine-versions-s390x.json
 cpu_models_file_s390x := $(destdir)/usr/share/kvm/cpu-models-s390x.json
@@ -137,6 +138,7 @@ install: build
 	rm -f $(destdir)/usr/lib/kvm/qemu-bridge-helper
 	rm -f $(destdir)/usr/lib/kvm/virtfs-proxy-helper
 
+ifneq ($(DEB_HOST_ARCH),s390x)
 	# CPU flags are static for QEMU version, allows avoiding more costly checks
 	./debian/parse-cpu-flags.pl $(destdir)/usr/bin/qemu-system-x86_64 max-x86_64-cpu > $(flagfile)
 	# NOTE: If the diff fails here after upgrading the QEMU submodule, check which new flags
@@ -156,7 +158,8 @@ install: build
 	# new expected files (and parse-cpu-models.pl script).
 	diff -u $(cpu_models_file_x86_64) ./debian/cpu-models-x86_64.json
 	diff -u $(cpu_models_file_aarch64) ./debian/cpu-models-aarch64.json
-ifeq ($(DEB_HOST_ARCH),s390x)
+	echo 'pve:Arch-Provides=qemu-system-arm, qemu-system-x86,' >> debian/$(PACKAGE).substvars
+else
 	# guest IPL firmware, built from pc-bios/s390-ccw (the prebuilt blob is purged from the source)
 	install -m 0644 $(BUILDDIR)/pc-bios/s390-ccw/s390-ccw.img $(destdir)/usr/share/kvm/s390-ccw.img
 	$(destdir)/usr/bin/qemu-system-s390x -machine help | ./debian/parse-machines.pl > $(machine_file_s390x)
@@ -191,6 +194,11 @@ binary-arch: build install
 #	dh_installinfo
 	dh_installman
 	dh_link
+ifeq ($(DEB_HOST_ARCH),s390x)
+	# pve-qemu-kvm.links aliases the x86_64 and aarch64 emulators, which s390x does not build
+	rm -f $(destdir)/usr/bin/qemu-system-arm $(destdir)/usr/bin/qemu-system-i386
+	rm -f $(addprefix $(destdir)/usr/share/man/man1/qemu-system-,aarch64.1 arm.1 i386.1 x86_64.1)
+endif
 	dh_strip --dbgsym-migration='pve-qemu-kvm-dbg (<<8.0.0-1~)'
 	dh_compress
 	dh_fixperms
