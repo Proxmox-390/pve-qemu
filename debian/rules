@@ -79,6 +79,7 @@ endif
 	    --enable-fuse \
 	    --enable-gnutls \
 	    --enable-libiscsi \
+	    --enable-libsystemd \
 	    --enable-libusb \
 	    --enable-linux-aio \
 	    --enable-linux-io-uring \
@@ -86,6 +87,7 @@ endif
 	    --enable-opengl \
 	    --enable-pa \
 	    --enable-png \
+	    --enable-pve-backup \
 	    --enable-rbd \
 	    --enable-seccomp \
 	    --enable-slirp \

@@ -1,3 +1,15 @@
+pve-qemu-kvm (11.1.90-1+s390x6) trixie; urgency=medium
+
+  * update submodule to qemu-mod 4cb2200fb4:
+    - build: PVE backup (VMA/PBS, libproxmox-backup-qemu) and the systemd
+      journal redirect are optional meson features (pve_backup,
+      libsystemd), so qemu-mod also builds natively on hosts without
+      those libraries.
+  * configure with --enable-pve-backup and --enable-libsystemd, so a
+    missing dependency fails the build instead of dropping the features.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Thu, 19 Nov 2026 11:06:03 +0100
+
 pve-qemu-kvm (11.1.90-1+s390x5) trixie; urgency=medium
 
   * update submodule to qemu-mod 40bbb02622:
