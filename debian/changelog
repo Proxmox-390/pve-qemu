@@ -1,3 +1,17 @@
+pve-qemu-kvm (11.1.90-1+s390x5) trixie; urgency=medium
+
+  * update submodule to qemu-mod 40bbb02622:
+    - s390x/kvm: present SCLP event-pending signals as one service signal.
+      KVM split them into an extra service signal with parameter 0, which
+      a mainframe guest takes for an unsolicited one: its line-mode console accepted
+      one command after IPL and hung at the second.
+    - sclplmconsole: optional hardcopy chardev (every message of the guest
+      as a line, a marker line with IPL device and load parameter for every
+      IPL, with or without a client); commands entered while the guest has
+      not read the previous one are queued.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Thu, 19 Nov 2026 10:37:44 +0100
+
 pve-qemu-kvm (11.1.90-1+s390x4) trixie; urgency=medium
 
   * update submodule to qemu-mod 88909d852c:
