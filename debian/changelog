@@ -1,3 +1,13 @@
+pve-qemu-kvm (11.1.90-1+s390x8) trixie; urgency=medium
+
+  * update submodule to qemu-mod 7e09eadc7b:
+    - sclplmconsole: IPL markers in the hardcopy only for IPLs the guest
+      runs: none for the resets around -loadstate (resume, rollback with
+      RAM), none for a paused start that never runs (backup); the marker of
+      an IPL prepared while paused is written when the VM starts.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Thu, 19 Nov 2026 14:09:33 +0100
+
 pve-qemu-kvm (11.1.90-1+s390x7) trixie; urgency=medium
 
   * update submodule to qemu-mod 069472841c:
