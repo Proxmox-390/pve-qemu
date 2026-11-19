@@ -1,3 +1,12 @@
+pve-qemu-kvm (11.1.90-1+s390x7) trixie; urgency=medium
+
+  * update submodule to qemu-mod 069472841c:
+    - sclplmconsole: the hardcopy chardev can be switched with QMP
+      chardev-change, so qemu-server can rotate the console log while the
+      VM runs without losing lines.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Thu, 19 Nov 2026 11:23:46 +0100
+
 pve-qemu-kvm (11.1.90-1+s390x6) trixie; urgency=medium
 
   * update submodule to qemu-mod 4cb2200fb4:
