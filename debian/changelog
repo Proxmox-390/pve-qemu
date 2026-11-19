@@ -1,3 +1,28 @@
+pve-qemu-kvm (11.1.90-1+s390x3) trixie; urgency=medium
+
+  * update submodule to qemu-mod f094f81170:
+    - migration and RAM snapshots of the mainframe devices: ECKD DASD
+      (eckd-ccw), 3590 tape (also while written), qeth and the 3270
+      terminal subchannel; a pending asynchronous channel program is
+      migrated for devices that opt in.
+    - ECKD: asynchronous I/O (channel programs no longer stall the vCPU on
+      slow backends), cached track dropped when the image may change.
+    - accept CCW data ending exactly at the 2 GiB line (FBA I/O errors on
+      guests with more than 2 GiB of RAM).
+    - keep pending adapter interrupts and pfault when a VM continues after
+      a RAM snapshot or a cancelled migration (virtio-ccw/QDIO stalls).
+    - snapshot loading: no tape medium I/O in post_load and no
+      channel-program IPL in the snapshot-load reset (both deadlocked).
+    - 3270: the display and the SCLP 3270 console persist without a client.
+    - EBCDIC: consistent CP037/CP500 tables, codepage= property on the
+      line-mode console and 3215; readline Home/End keys; line-mode console
+      GDS IDs stored big-endian.
+    - device loadparm accepted on the -ipl device.
+    - fix a use-after-free in x-remote-object (qom-list-properties).
+    - migrate the TCG condition code; wait for asynchronous IPL I/O.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Thu, 19 Nov 2026 01:54:30 +0100
+
 pve-qemu-kvm (11.1.90-1+s390x2) trixie; urgency=medium
 
   * update submodule to qemu-mod fe2791af5f: rename the AES helpers of the
