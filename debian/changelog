@@ -1,3 +1,14 @@
+pve-qemu-kvm (11.1.90-1+s390x9) trixie; urgency=medium
+
+  * update submodule to qemu-mod e93bf2526f:
+    - s390x/skeys: the storage keys migrate in precopy (first pass while
+      the VM runs, final pass only sets the keys that differ) and are read
+      in parallel: live migration downtime of a mainframe guest 2 s -> 0.27 s
+      with 2 GiB, 7.6 s -> 0.8 s with 8 GiB; stream compatible with older
+      builds in both directions.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Thu, 19 Nov 2026 18:30:03 +0100
+
 pve-qemu-kvm (11.1.90-1+s390x8) trixie; urgency=medium
 
   * update submodule to qemu-mod 7e09eadc7b:
