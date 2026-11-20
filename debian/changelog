@@ -1,3 +1,19 @@
+pve-qemu-kvm (11.1.91-1+s390x1) trixie; urgency=medium
+
+  * update submodule to qemu-mod b192baef7b:
+    - merge upstream QEMU master at v11.2.0-rc1 (QEMU 11.1.91); the
+      qemu-mod and Proxmox patches are carried unchanged.
+    - s390x/czam: without KVM, the machine fails with "requires KVM"
+      instead of an assertion about the missing host CPU type.
+    - qtest fixes: qom-test and test-hmp skip czam, qmp-test expects the
+      out-of-band capability to be disabled, analyze-migration.py reads
+      the s390-skeys section.
+
+  * build the s390-ccw IPL firmware with -ffile-prefix-map, so it no longer
+    contains the build directory.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Fri, 20 Nov 2026 17:05:31 +0100
+
 pve-qemu-kvm (11.1.90-1+s390x11) trixie; urgency=medium
 
   * Rebuild with cleaned changelog and test data.

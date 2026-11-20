@@ -52,6 +52,10 @@ ifneq "$(wildcard /usr/share/misc/config.guess)" ""
 endif
 
 	# guest-agent is only required for guest systems
+	# cross_cc_cflags_s390x: the s390-ccw firmware is built by its own Makefile with absolute
+	# source paths and without the package CFLAGS, so the -ffile-prefix-map from dpkg does not reach it
+	# and assert messages carried the build directory; map it to "." there too.
+	cross_cc_cflags_s390x="-ffile-prefix-map=$(CURDIR)=." \
 	./configure \
 	    --disable-download \
 	    --docdir=/usr/share/doc/pve-qemu-kvm \
