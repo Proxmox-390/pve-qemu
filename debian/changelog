@@ -1,3 +1,17 @@
+pve-qemu-kvm (11.1.90-1+s390x10) trixie; urgency=medium
+
+  * update submodule to qemu-mod ffaa6e0f70:
+    - s390x/ckd-image: a CKD image may be longer than the volume its header
+      declares (padding from ZFS volumes, LVM extents), also with a nonzero
+      file sequence byte (zPDT-style images); new eckd-ccw property
+      cylinders (must match the header, sizes images whose header has
+      none); Hercules multi-file members are recognised and refused.
+    - s390x/sclp3270console: the kept screen and a read no client got yet
+      migrate (live migration, RAM snapshot rollback, resume), so the
+      console no longer comes back empty.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Fri, 20 Nov 2026 12:40:00 +0100
+
 pve-qemu-kvm (11.1.90-1+s390x9) trixie; urgency=medium
 
   * update submodule to qemu-mod e93bf2526f:
