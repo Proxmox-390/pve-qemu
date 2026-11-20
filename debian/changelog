@@ -1,3 +1,15 @@
+pve-qemu-kvm (11.1.91-1+s390x2) trixie; urgency=medium
+
+  * update submodule to qemu-mod 7a884f16f3:
+    - s390x/css: CLEAR SUBCHANNEL completes with status pending alone and
+      no longer keeps the alert bit of discarded unsolicited status. A
+      Linux guest hung for good when it set a 3270 terminal online (at
+      boot, or later with chccwdev) while a tn3270 client was connected:
+      cio took the clear completion for unsolicited status and kept
+      waiting for it.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Fri, 20 Nov 2026 18:53:09 +0100
+
 pve-qemu-kvm (11.1.91-1+s390x1) trixie; urgency=medium
 
   * update submodule to qemu-mod b192baef7b:
