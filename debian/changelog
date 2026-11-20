@@ -1,3 +1,9 @@
+pve-qemu-kvm (11.1.90-1+s390x11) trixie; urgency=medium
+
+  * Rebuild with cleaned changelog and test data.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Fri, 20 Nov 2026 12:55:24 +0100
+
 pve-qemu-kvm (11.1.90-1+s390x10) trixie; urgency=medium
 
   * update submodule to qemu-mod ffaa6e0f70:
