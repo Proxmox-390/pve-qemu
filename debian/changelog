@@ -1,3 +1,15 @@
+pve-qemu-kvm (11.1.91-1+s390x3) trixie; urgency=medium
+
+  * update submodule to qemu-mod 0ef6282c88:
+    - s390x/skeys: loadvm (HMP loadvm, QMP snapshot-load) of a snapshot
+      taken before the guest used storage keys now resets the keys to
+      their initial state (ACC 0, no fetch protection). Before, the keys
+      the guest had set after the snapshot was taken were kept. Loads of
+      snapshots with keys and migration to a fresh QEMU are unchanged.
+    - new qtest s390x-skeys-test.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Sat, 21 Nov 2026 16:57:06 +0100
+
 pve-qemu-kvm (11.1.91-1+s390x2) trixie; urgency=medium
 
   * update submodule to qemu-mod 7a884f16f3:
