@@ -1,3 +1,14 @@
+pve-qemu-kvm (11.1.91+git20261124.1fb1e8e5-1+s390x1) trixie; urgency=medium
+
+  * update submodule to qemu-mod 1fb1e8e5b1: SCLP file access device
+    (sclpfileaccess). It serves the files of a host directory to the
+    guest through SCLP event type 0x07, as the media a system is loaded
+    from: installers of mainframe operating systems read their
+    distribution media this way after an IPL from an .ins file, and
+    Linux uses it as the HMC drive.
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Tue, 24 Nov 2026 15:28:26 +0000
+
 pve-qemu-kvm (11.1.91+git20261120.46efa66b-1+s390x1) trixie; urgency=medium
 
   * update submodule to qemu-mod 46efa66b40, which brings the Proxmox
