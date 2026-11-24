@@ -1,3 +1,11 @@
+pve-qemu-kvm (11.1.91+git20261124.2.ffb98a42-1+s390x1) trixie; urgency=medium
+
+  * update submodule to qemu-mod ffb98a423a: INS files with overlapping
+    components can be loaded (the INS files of Linux installers place
+    the parameter file inside the kernel image).
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Tue, 24 Nov 2026 16:05:11 +0000
+
 pve-qemu-kvm (11.1.91+git20261124.1fb1e8e5-1+s390x1) trixie; urgency=medium
 
   * update submodule to qemu-mod 1fb1e8e5b1: SCLP file access device
