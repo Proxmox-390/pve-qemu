@@ -1,3 +1,12 @@
+pve-qemu-kvm (11.1.91+git20261125.r2.fb8c7c43-1+s390x1) trixie; urgency=medium
+
+  * update submodule to qemu-mod fb8c7c4344: machine property nested-
+    esa390 (auto by default): a hypervisor in the guest can run its own
+    guests in ESA/390 mode on host kernels that support it (Linux 7.1
+    and later)
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Wed, 25 Nov 2026 15:18:38 +0000
+
 pve-qemu-kvm (11.1.91+git20261125.c93baa1e-1+s390x1) trixie; urgency=medium
 
   * update submodule to qemu-mod c93baa1e4a:
