@@ -1,3 +1,21 @@
+pve-qemu-kvm (11.1.91+git20261125.c93baa1e-1+s390x1) trixie; urgency=medium
+
+  * update submodule to qemu-mod c93baa1e4a:
+    - SCLP file access device: requests complete when the VM stops, regular
+      files only, names found without regard to case; INS files find their
+      components without regard to case
+    - channel subsystem: no data address check for a CCW with the skip
+      flag; measurement blocks stored as the architecture describes; machine
+      property ext-measurement-block
+    - ECKD: Suspend Multipath Reconnection, Read CKD and Read Count after
+      another read, read orientation migrates and is cleared by a reset
+    - 3270: field address kept in a chained Read Modified
+    - experimental: ESA/390-compatibility mode properties esa390-cm and
+      esa390-dat and machine type czam-compat (need a host kernel with the
+      matching KVM support), property x-sclp-cpu-features
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Wed, 25 Nov 2026 11:43:47 +0000
+
 pve-qemu-kvm (11.1.91+git20261124.2.ffb98a42-1+s390x1) trixie; urgency=medium
 
   * update submodule to qemu-mod ffb98a423a: INS files with overlapping
