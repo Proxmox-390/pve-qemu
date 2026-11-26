@@ -1,3 +1,30 @@
+pve-qemu-kvm (11.1.91+git20261126.34e9fa2a-1+s390x1) trixie; urgency=medium
+
+  * update submodule to qemu-mod 34e9fa2a96:
+    - ECKD: Write Count, Key and Data accepts any record number in the
+      count area (end-of-file records numbered X'FF' no longer make the
+      channel program fail)
+    - channel subsystem: the subchannel key and the suspend-control,
+      CCW-format, prefetch, initial-status, address-limit and
+      suppress-suspended bits of the SCSW are taken from the ORB at each
+      start (the format bit stayed set after a format-1 channel program)
+    - machine type czam: the extended I/O measurement block facility is
+      off by default (ext-measurement-block=on offers it)
+    - 3590 tape: a volume ends at the block-ID range of the drive (32 bits
+      on a 3590, 22 bits on 3480/3490) or at the new properties capacity
+      and max-blocks; logical end of tape (unit exception) eot-margin bytes
+      or eot-margin-blocks blocks before it, physical end of tape after it;
+      data chaining for blocks larger than 64 KiB; a read ending at the end
+      of a data-chained CCW no longer reads into the next CCW; tape-mark,
+      load-point and end-of-data status and sense data fixed; images whose
+      length is not a multiple of 512 bytes mount; faster positioning
+    - experimental ESA/390-compatibility mode: second revision of the
+      kernel interface (capability offered on every host, no module
+      parameter) and SIGP set-architecture, store status and set prefix
+      in that mode handled in QEMU
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Thu, 26 Nov 2026 10:00:00 +0000
+
 pve-qemu-kvm (11.1.91+git20261125.r2.fb8c7c43-1+s390x1) trixie; urgency=medium
 
   * update submodule to qemu-mod fb8c7c4344: machine property nested-
