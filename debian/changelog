@@ -1,3 +1,18 @@
+pve-qemu-kvm (11.1.91+git20261126.r4.b55a5e56-1+s390x1) trixie; urgency=medium
+
+  * update submodule to qemu-mod b55a5e565f:
+    - ECKD: Read Data and Read Key and Data skip record zero after a
+      home-address orientation
+    - ESA/390-compatibility mode: 64-bit Linux kernels loaded with -kernel
+      start with a 31-bit PSW
+    - machine property tod-source=host: start a KVM guest on host time
+    - qemu-img ckdinit: write an initialised empty 3390 CKD volume
+    - IUCV provided by QEMU (opt-in): s390-iucv, iucv-net point-to-point
+      IP link, iucv-tcpip service and a z/VM personality of the machine;
+      needs host kernel support only when configured
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Thu, 26 Nov 2026 17:00:00 +0000
+
 pve-qemu-kvm (11.1.91+git20261126.r3.d9a99f00-1+s390x1) trixie; urgency=medium
 
   * update submodule to qemu-mod d9a99f0065:
