@@ -1,3 +1,23 @@
+pve-qemu-kvm (11.1.91+git20261126.r3.d9a99f00-1+s390x1) trixie; urgency=medium
+
+  * update submodule to qemu-mod d9a99f0065:
+    - ECKD: the second and following Read Track commands of a Locate
+      Record domain advance to the next track (a multi-track Read Tracks
+      domain returned the first track repeatedly)
+    - 3590 tape: Read Buffered Log, Load Display (read-only property
+      "display") and Mode Set with supervisor inhibit; Rewind Unload ends
+      with ERA 52 (end of volume complete); Sense Path Group ID reports an
+      assigned drive as explicitly enabled (the assignment was taken as
+      lost at the first vary online after IPL)
+    - experimental ESA/390-compatibility mode: esa390-dat uses the
+      ESA/390 DAT shadowing of the host kernel (shadow tables in host
+      memory, the guest keeps all of its storage, migration allowed);
+      esa390-dat=on is refused on kernels without it
+    - 31-bit Linux kernels: -append and -initrd are honoured, 31-bit ELF
+      kernels start with a 31-bit PSW
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Thu, 26 Nov 2026 15:00:00 +0000
+
 pve-qemu-kvm (11.1.91+git20261126.ed457506-1+s390x1) trixie; urgency=medium
 
   * update submodule to qemu-mod ed45750665:
