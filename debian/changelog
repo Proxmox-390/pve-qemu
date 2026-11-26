@@ -1,3 +1,25 @@
+pve-qemu-kvm (11.1.91+git20261126.ed457506-1+s390x1) trixie; urgency=medium
+
+  * update submodule to qemu-mod ed45750665:
+    - CPU: with the host-dependent CPU models (host, max) STORE CPU ID
+      reports the CPU version of the host machine on s390-ccw-virtio-11.2
+      and czam-v1; migration-safe models keep X'00', older machine types
+      are unchanged
+    - ECKD: 3380 disks: images in the 3380 track format, 3380 identity
+      (also on a 3390 image), Read Device Characteristics and track
+      capacity of a 3380 behind a 3990; device-type and control-unit-type
+      default to the image's track format
+    - 3590 tape: medium permissions follow the loaded medium (read-only
+      and writable media can be exchanged on a running drive); Rewind
+      Unload ends with the unload-complete unit check; 3590 sense format
+      with reason codes; Set/Sense Path Group ID, Assign and Unassign;
+      commands that need no medium complete on an empty drive; an AWS
+      medium with less than 512 bytes of data is cut back to its length
+    - tests: s390x guest code in the qtests runs under KVM only
+  * declare the libbz2-dev build dependency (bzip2 support for DMG images)
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Thu, 26 Nov 2026 14:00:00 +0000
+
 pve-qemu-kvm (11.1.91+git20261126.34e9fa2a-1+s390x1) trixie; urgency=medium
 
   * update submodule to qemu-mod 34e9fa2a96:
