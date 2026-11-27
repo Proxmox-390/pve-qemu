@@ -51,6 +51,12 @@ License:
      4) QEMU is a trademark of Fabrice Bellard.
      -- Fabrice Bellard.
 
+    lwIP (qemu/subprojects/lwip, used by the IUCV TCP/IP service of s390x):
+       Copyright (c) 2001-2004 Swedish Institute of Computer Science.
+       All rights reserved. Released under the BSD 3-clause license; the
+       full text is in qemu/subprojects/lwip/COPYING.
+       Homepage: https://savannah.nongnu.org/projects/lwip/
+
     BIOS sources in QEMU:
        bios.bin: Copyright (C) 2002 MandrakeSoft S.A. and others.  This file
        is licensed under the GNU LGPL, version 2, or (at your option) any later

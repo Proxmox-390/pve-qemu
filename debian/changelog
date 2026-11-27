@@ -1,3 +1,26 @@
+pve-qemu-kvm (11.1.91+git20261127.r6.4ce4e086-1+s390x1) trixie; urgency=medium
+
+  * update submodule to qemu-mod 4ce4e08625:
+    - iucv-tcpip: the IUCV TCP/IP socket service has a TCP/IP stack of its
+      own (lwIP 2.2.1, built into QEMU from the qemu-mod tree) on a network
+      backend: it owns its IPv4 address on the network (ARP, ICMP echo,
+      TCP, UDP, raw ICMP), like any host on a bridge; new properties
+      netdev, mac, gateway, dns, domain, mtu, max-open-sockets; the host
+      socket mode (hostfwd, hostfwd-addr, deny, allow-host, raw,
+      max-host-sockets) is gone; one iucv-tcpip device per VM
+    - IUCV: limits for guest messages (largest message per service, data
+      held per machine, message limit counts until the completion is
+      taken), the service is told once when a path ends, real addresses
+      for the interruption and poll buffers
+    - iucv-net: property mtu for the Ethernet side; larger packets of the
+      guest are fragmented or answered with ICMP fragmentation needed
+    - z/VM personality: DIAGNOSE 8 command length
+    - qtests for IUCV under KVM, documentation
+
+  * debian/copyright: lwIP (BSD-3-Clause)
+
+ -- Yvan Janssens <yvanj@cyber.gent>  Fri, 27 Nov 2026 18:00:00 +0000
+
 pve-qemu-kvm (11.1.91+git20261126.r4.b55a5e56-1+s390x1) trixie; urgency=medium
 
   * update submodule to qemu-mod b55a5e565f:
